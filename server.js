@@ -1,0 +1,15 @@
+var express = require('express');
+var app = express();
+var PORT = 3000;
+
+app.use(express.static('/view/css'))
+app.use(express.static('/view/html'))
+app.use(express.static('/view/js'))
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/view/html/index.html')
+})
+
+app.listen(PORT, function(){
+  console.log('listening on '+ PORT)
+})

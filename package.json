@@ -1,0 +1,14 @@
+{
+  "name": "nucleotext",
+  "version": "1.0.0",
+  "description": "A text to nucleotide converter for the scientifically curious",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jeff Shapiro",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
