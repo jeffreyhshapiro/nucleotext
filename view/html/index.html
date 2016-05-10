@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app='nucleotext'>
 <head>
   <title></title>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+  <h1 class="text-center">nucleotext</h1>
+  <p>nucleotext is a thought experiment that was inspired by an article I read from Harvard biologist George Church.  The most efficient storage system of information in the universe is DNA.  Now you can see what the day to day information you generate looks like as a single strand of DNA.</p> 
+  <p>When you input your text, it is converted to binary, then to a nucleotide base.  0 is converted to an A or T, and 1 is converted to a G or C.</p>
+  <br>
+  <br>
+  <div class="form-group">
+    <textarea class="form-control" rows="5" placeholder='Get ready to be nucleotexted' ng-model='nucleotext'></textarea>
+  </div>
+  <div ng-controller = 'submitText'>
+    <button type="button" class="btn btn-primary" ng-click='submitText()'>Submit</button>
+  </div>
+</div>
 
-<input type="text" ng-model='name'>
-
-<h1> Hello my name is {{name}} </h1>
-
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 <script type="text/javascript" src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="textSubmit.js"></script>
 </body>
 </html>
