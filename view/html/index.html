@@ -10,6 +10,7 @@
   <h1 class="text-center">nucleotext</h1>
   <p>nucleotext is a thought experiment that was inspired by an article I read from Harvard biologist George Church.  The most efficient storage system of information in the universe is DNA.  Now you can see what the day to day information you generate looks like as a single strand of DNA.</p> 
   <p>When you input your text, it is converted to binary, then to a nucleotide base.  0 is converted to an A or T, and 1 is converted to a G or C.</p>
+  <p>The nucleotide sequence is randomly generated using Math.random.  This means if you analyze the same text twice you can get two different DNA sequences.  The total amount of combinations your binary sequence can have is defined as f(x) = 2^x, where x is the length of your binary string.</p>
   <br>
   <br>
   <div class="form-group">
@@ -17,9 +18,14 @@
   </div>
   <div ng-controller = 'submitText'>
     <button type="button" class="btn btn-primary" ng-click='convertToBinary()'>Submit</button>
+  <div ng-show = 'binaryString' class="binaryString">
+    <h3>Binary</h3>
+    <div> {{binaryString}} </div>
   </div>
-  <div ng-controller='binaryConvert'>
-    <div ng-bind='binaryText'></div>
+  <div ng-show = 'nucleotideString' class="nucleotideString">
+    <h3>Nucleotide Sequence</h3>
+    <div> 5'- {{nucleotideString}} -3'</div>
+  </div>
   </div>
 </div>
 
@@ -27,6 +33,6 @@
 <script type="text/javascript" src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="textSubmit.js"></script>
-<script type="text/javascript" src="binaryConvert.js"></script>
+<script type="text/javascript" src="binaryRender.js"></script>
 </body>
 </html>
