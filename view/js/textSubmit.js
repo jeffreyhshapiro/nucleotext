@@ -33,6 +33,11 @@ angular.module('nucleotext')
             }
           }
           $scope.nucleotideString = $scope.nucleotides.join('')
+          $scope.calcSequences();
+        }
+        $scope.calcSequences = function() {
+          var possibilities = Math.pow(2, $scope.nucleotides.length)
+          $scope.possibilitiesFixed = Number(possibilities).toFixed(0)
         }
       }
     }
