@@ -10,8 +10,9 @@
 <div class="container">
   <h1 class="text-center">nucleotext</h1>
   <p>nucleotext is a thought experiment that was inspired by an article I read from Harvard biologist George Church.  The most efficient storage system of information in the universe is DNA.  Now you can see what the day to day information you generate looks like as a single strand of DNA.</p>
-  <p>When you input your text, it is converted to binary, then to a nucleotide base.  0 is converted to an A or T, and 1 is converted to a G or C.</p>
-  <p>The nucleotide sequence is randomly generated using Math.random.  This means if you analyze the same text twice you can get two different DNA sequences.  The total amount of combinations your nucleotide sequence can have is defined as f(x) = 2^x, where x is the length of your binary string.</p>
+  <p>When you submit your text query, you can choose to have it transformed into a binary or base four string.  Depending on the transformation method, you will get two very different sequences for the same string of text.</p>
+  <p>For binary transformation the nucleotide sequence is randomly generated using Math.random.  This means if you analyze the same text twice you will get two different DNA sequences.  The total amount of combinations your nucleotide sequence can have is defined as f(x) = 2^x, where x is the length of your binary string.</p>
+  <p>For base four transformation the nucleotide sequence is generated using the fact that there are four nucleotide bases and four numbers displayed in the base four string (0, 1, 2, 3).  I assigned each base to a number meaning that there is no variation in generating this sequence from calculation to calculation. </p>
   <br>
   <br>
   <div class="form-group">
