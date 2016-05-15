@@ -1,4 +1,16 @@
 angular.module('nucleotext')
+  .controller('selectAlg', function($scope) {
+    $scope.selectAlg = function() {
+      if ($scope.alg === 'binary') {
+        $scope.convertToBinary();
+      } else if ($scope.alg === 'baseFour') {
+        $scope.convertToBaseFour();
+      } else {
+        console.log('choose a string conversion algorithm')
+      }
+    }
+  })
+
   .directive('genBinary', function() {
     return {
       restrict: 'EA',
@@ -10,17 +22,33 @@ angular.module('nucleotext')
             $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
           }
           $scope.binaryString = $scope.binaryText.join('')
-          $scope.generateNucleotideSequence();
+          $scope.generateNucleotideSequenceBinary();
         }
       }
     }
   })
-  .directive('genNucString', function() {
+  .directive('genBaseFour', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'template/baseFour.html',
+      link: function($scope, elem, attrs) {
+        $scope.convertToBaseFour = function() {
+          $scope.baseFourText = [];
+          for (var i = 0; i < $scope.nucleotext.length; i++) {
+            $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
+          }
+          $scope.baseFourString = $scope.baseFourText.join('')
+          $scope.generateNucleotideSequenceBaseFour();
+        }
+      }
+    }
+  })
+  .directive('genNucStringBinary', function() {
     return {
       restrict: 'EA',
       templateUrl: 'template/nucTemplate.html',
       link: function($scope, elem, attrs) {
-        $scope.generateNucleotideSequence = function() {
+        $scope.generateNucleotideSequenceBinary = function() {
           $scope.at = ['A','T']
           $scope.gc = ['G','C']
           $scope.nucleotides = []
@@ -38,6 +66,34 @@ angular.module('nucleotext')
         $scope.calcSequences = function() {
           var possibilities = Math.pow(2, $scope.nucleotides.length)
           $scope.possibilitiesFixed = Number(possibilities).toFixed(0)
+        }
+      }
+    }
+  })
+  .directive('genNucStringBaseFour', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'template/nucTemplateBaseFour.html',
+      link: function($scope, elem, attrs) {
+        $scope.generateNucleotideSequenceBaseFour = function() {
+          $scope.nucleotideBaseFour = [];
+          for (var i = 0; i < $scope.baseFourString.length; i++) {
+            switch ($scope.baseFourString[i]) {
+              case '0':
+                $scope.nucleotideBaseFour.push('A')
+                break;
+              case '1':
+                $scope.nucleotideBaseFour.push('T')
+                break;
+              case '2':
+                $scope.nucleotideBaseFour.push('G')
+                break;
+              case '3':
+                $scope.nucleotideBaseFour.push('C')
+                break;
+            }
+          }
+          $scope.nucleotideStringBaseFour = $scope.nucleotideBaseFour.join('')
         }
       }
     }
