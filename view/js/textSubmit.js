@@ -11,14 +11,13 @@ angular.module('nucleotext')
       }
     }
   })
-
   .directive('genBinary', function() {
     return {
       restrict: 'EA',
       templateUrl: 'template/binaryTemplate.html',
       link: function($scope, elem, attrs) {
         $scope.convertToBinary = function() {
-          $scope.baseFourString = false;
+          $scope.baseFourString = false; //if baseFourString is showing on page, hide it
           $scope.binaryText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
@@ -35,7 +34,7 @@ angular.module('nucleotext')
       templateUrl: 'template/baseFour.html',
       link: function($scope, elem, attrs) {
         $scope.convertToBaseFour = function() {
-          $scope.binaryString = false;
+          $scope.binaryString = false; //if binaryString is showing on page hide it
           $scope.baseFourText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
@@ -52,7 +51,7 @@ angular.module('nucleotext')
       templateUrl: 'template/nucTemplate.html',
       link: function($scope, elem, attrs) {
         $scope.generateNucleotideSequenceBinary = function() {
-          $scope.nucleotideStringBaseFour = false;
+          $scope.nucleotideStringBaseFour = false; //if nucleotideStringBaseFour is showing on page hide it
           $scope.at = ['A','T']
           $scope.gc = ['G','C']
           $scope.nucleotides = []
@@ -80,7 +79,7 @@ angular.module('nucleotext')
       templateUrl: 'template/nucTemplateBaseFour.html',
       link: function($scope, elem, attrs) {
         $scope.generateNucleotideSequenceBaseFour = function() {
-          $scope.nucleotideString = false;
+          $scope.nucleotideString = false; //if nucleotideString binary is showing on page hide it
           $scope.nucleotideBaseFour = [];
           for (var i = 0; i < $scope.baseFourString.length; i++) {
             switch ($scope.baseFourString[i]) {
