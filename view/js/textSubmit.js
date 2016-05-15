@@ -18,6 +18,7 @@ angular.module('nucleotext')
       templateUrl: 'template/binaryTemplate.html',
       link: function($scope, elem, attrs) {
         $scope.convertToBinary = function() {
+          $scope.baseFourString = false;
           $scope.binaryText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
@@ -34,6 +35,7 @@ angular.module('nucleotext')
       templateUrl: 'template/baseFour.html',
       link: function($scope, elem, attrs) {
         $scope.convertToBaseFour = function() {
+          $scope.binaryString = false;
           $scope.baseFourText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
@@ -50,6 +52,7 @@ angular.module('nucleotext')
       templateUrl: 'template/nucTemplate.html',
       link: function($scope, elem, attrs) {
         $scope.generateNucleotideSequenceBinary = function() {
+          $scope.nucleotideStringBaseFour = false;
           $scope.at = ['A','T']
           $scope.gc = ['G','C']
           $scope.nucleotides = []
@@ -77,6 +80,7 @@ angular.module('nucleotext')
       templateUrl: 'template/nucTemplateBaseFour.html',
       link: function($scope, elem, attrs) {
         $scope.generateNucleotideSequenceBaseFour = function() {
+          $scope.nucleotideString = false;
           $scope.nucleotideBaseFour = [];
           for (var i = 0; i < $scope.baseFourString.length; i++) {
             switch ($scope.baseFourString[i]) {
