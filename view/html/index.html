@@ -19,8 +19,10 @@
   </div>
   <div ng-controller='selectAlg' class="radio">
     <button type="button" class="btn btn-primary" ng-click='selectAlg()'>Submit</button>
-    <label class='pull-right'><input type="radio" ng-model='alg' value='baseFour' name="optradio">Base 4 Calculation</label>
-    <label class="pull-right" id="binaryButton"><input type="radio" ng-model='alg' value='binary' name="optradio">Binary Calculation</label>
+    <label id="binaryPadding"><input type="radio" id='binaryButton' ng-model='alg' value='binary' name="optradio">Binary Calculation</label>
+    <label><input type="radio" ng-model='alg' value='baseFour' name="optradio">Base 4 Calculation</label>
+    <br /><br />
+    <div ng-hide='chooseCalcMethod'>Please choose either binary or base four as your calculation method.</div>
   </div>
   <gen-binary></gen-binary>
   <gen-base-four></gen-base-four>

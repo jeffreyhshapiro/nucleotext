@@ -1,12 +1,13 @@
 angular.module('nucleotext')
   .controller('selectAlg', function($scope) {
+    $scope.chooseCalcMethod = true;
     $scope.selectAlg = function() {
       if ($scope.alg === 'binary') {
         $scope.convertToBinary();
       } else if ($scope.alg === 'baseFour') {
         $scope.convertToBaseFour();
       } else {
-        console.log('choose a string conversion algorithm')
+        $scope.chooseCalcMethod = false;
       }
     }
   })
