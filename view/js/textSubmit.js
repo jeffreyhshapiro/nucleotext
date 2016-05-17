@@ -3,14 +3,33 @@ angular.module('nucleotext')
     $scope.chooseCalcMethod = true;
     $scope.selectAlg = function() {
       if ($scope.alg === 'binary') {
-        $scope.convertToBinary();
+        $scope.showNucleotext();
       } else if ($scope.alg === 'baseFour') {
         $scope.convertToBaseFour();
       } else {
         $scope.chooseCalcMethod = false;
       }
+      $scope.queryData= {
+        nucleotext: $scope.nucleotext,
+        binaryString: $scope.binaryString,
+        nucleotideString: $scope.nucleotideString,
+        possibilities: $scope.possibilitiesFixed
+      }
     }
   })
+  .directive('textQuery', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'template/textQuery.html',
+      link: function($scope, elem, attrs) {
+        $scope.showNucleotext = function() {
+          $scope.showNucleotextString = true;
+          $scope.convertToBinary();
+        }
+      }
+    }
+  })
+
   .directive('genBinary', function() {
     return {
       restrict: 'EA',
