@@ -5,15 +5,24 @@ angular.module('nucleotext')
       if ($scope.alg === 'binary') {
         $scope.showNucleotext();
       } else if ($scope.alg === 'baseFour') {
-        $scope.convertToBaseFour();
+        $scope.showNucleotext();
       } else {
         $scope.chooseCalcMethod = false;
       }
-      $scope.queryData= {
-        nucleotext: $scope.nucleotext,
-        binaryString: $scope.binaryString,
-        nucleotideString: $scope.nucleotideString,
-        possibilities: $scope.possibilitiesFixed
+      //direct logic to store data into an object depending on if $scope.alg = binary or base four
+      if ($scope.alg === 'binary') {
+        $scope.queryData= {
+          nucleotext: $scope.nucleotext,
+          binaryString: $scope.binaryString,
+          nucleotideString: $scope.nucleotideString,
+          possibilities: $scope.possibilitiesFixed
+        }
+      } else {
+        $scope.queryData = {
+          nucleotext: $scope.nucleotext,
+          baseFourString: $scope.baseFourString,
+          nucleotideString: $scope.nucleotideStringBaseFour,
+        }
       }
     }
   })
@@ -24,7 +33,11 @@ angular.module('nucleotext')
       link: function($scope, elem, attrs) {
         $scope.showNucleotext = function() {
           $scope.showNucleotextString = true;
-          $scope.convertToBinary();
+          if ($scope.alg === 'binary') {
+            $scope.convertToBinary();
+          } else {
+            $scope.convertToBaseFour();
+          }
         }
       }
     }
