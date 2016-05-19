@@ -6,7 +6,7 @@ angular.module('nucleotext')
         $scope.showNucleotext();
       } else if ($scope.alg === 'baseFour') {
         $scope.showNucleotext();
-      } else {
+      } else if (!$scope.alg || $scope.nucleotext === ''){
         $scope.chooseCalcMethod = false;
       }
       //direct logic to store data into an object depending on if $scope.alg = binary or base four
