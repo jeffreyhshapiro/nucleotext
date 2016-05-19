@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 var PORT = process.env.PORT || 3000;
 
 app.use(express.static('view/css'))
