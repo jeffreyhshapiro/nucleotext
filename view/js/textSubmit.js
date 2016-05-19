@@ -1,5 +1,5 @@
 angular.module('nucleotext')
-  .controller('selectAlg', function($scope) {
+  .controller('selectAlg', function($scope, $http) {
     $scope.chooseCalcMethod = true;
     $scope.selectAlg = function() {
       if ($scope.alg === 'binary') {
