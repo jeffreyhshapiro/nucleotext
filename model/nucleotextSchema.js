@@ -8,4 +8,4 @@ var nucleotextSchema = new Schema ({
   nucleotideSequence: String
 })
 
-var nucleotext = mongoose.model('nucleotext', nucleotextSchema)
+module.exports = mongoose.model('nucleotext', nucleotextSchema)

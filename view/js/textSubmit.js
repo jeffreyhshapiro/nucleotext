@@ -12,13 +12,22 @@ angular.module('nucleotext')
       //direct logic to store data into an object depending on if $scope.alg = binary or base four
       if ($scope.alg === 'binary') {
         $scope.queryData= {
+          type: 'binary'
           nucleotext: $scope.nucleotext,
           binaryString: $scope.binaryString,
           nucleotideString: $scope.nucleotideString,
-          possibilities: $scope.possibilitiesFixed
         }
+        // console.log($scope.queryData)
+        $http.post('/nucleotexts', $scope.queryData).then(
+          function(response) {
+            console.log(response)
+          },
+          function(err) {
+            console.log(err)
+          })
       } else {
         $scope.queryData = {
+          type: "base four"
           nucleotext: $scope.nucleotext,
           baseFourString: $scope.baseFourString,
           nucleotideString: $scope.nucleotideStringBaseFour,
