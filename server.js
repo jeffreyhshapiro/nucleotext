@@ -19,14 +19,13 @@ app.get('/', function(req, res) {
 })
 
 app.post('/nucleotexts', function(req, res) {
-  console.log(req.body.nucleotext)
+  console.log(req.body)
   var nucleotextDB = new nucleotextSchema({
-    type: 'will pass type here',
+    type: req.body.type,
     nucleotext: req.body.nucleotext,
     baseString: req.body.binaryString || req.body.baseFourString,
     nucleotideSequence: req.body.nucleotideString
   })
-  console.log('schema sequence ran')
   nucleotextDB.save(function(err, nucleotext) {
     if (err || !nucleotext) {
       console.log(err)
