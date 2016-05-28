@@ -15,7 +15,6 @@ angular.module('nucleotext')
       }
     }
   })
-
   .directive('genBinary', function() {
     return {
       restrict: 'EA',
@@ -103,6 +102,56 @@ angular.module('nucleotext')
             }
           }
           $scope.nucleotideStringBaseFour = $scope.nucleotideBaseFour.join('')
+        }
+      }
+    }
+  })
+  .directive('decoder', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'template/decoder.html',
+      link: function($scope, elem, attrs) {
+        $scope.decoded = false;
+        $scope.decoder = function() {
+          $scope.decoded = true;
+          $scope.reverseToBaseFour = [];
+          var wordConstructor = [];
+          for (var i = 0; i < $scope.nucleotext.length; i++) {
+            // console.log($scope.nucleotext[i])
+            switch ($scope.nucleotext[i]) {
+              case 'A':
+                $scope.reverseToBaseFour.push('0')
+                break;
+              case 'T':
+                $scope.reverseToBaseFour.push('1')
+                break;
+              case 'G':
+                $scope.reverseToBaseFour.push('2')
+                break;
+              case 'C':
+                $scope.reverseToBaseFour.push('3')
+                break;
+            }
+          }
+          console.log($scope.reverseToBaseFour)
+          for (var i = 0; i < $scope.reverseToBaseFour.length; i++) {
+            wordConstructor.push($scope.reverseToBaseFour.splice(0, 4))
+          }
+          for (var i = 0; i < wordConstructor.length; i++) {
+            // console.log(wordConstructor[i].join(''))
+            wordConstructor[i].join('')
+            var convertToDecimal = parseInt(wordConstructor[i].join(''), 4)
+            console.log(String.fromCharCode(convertToDecimal))
+          }
+          // grab set of four items from an array
+          // join them together
+          // convert to base 10 (unicode??)
+          // convert to a letter
+
+          // for (var i = 0; i < $scope.reverseToBaseFour.length; i++) {
+          //   $scope.reverseToBaseFour.splice(0, 4);
+          //   console.log($scope.reverseToBaseFour)
+          // }
         }
       }
     }
