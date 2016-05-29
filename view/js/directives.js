@@ -46,8 +46,8 @@ angular.module('nucleotext')
           $scope.binaryString = false; //if binaryString is showing on page hide it
           $scope.baseFourText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            if ($scope.nucleotext[i] === ' ') {
-              $scope.baseFourText.push('0200')
+            if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 3) {
+              $scope.baseFourText.push('0' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle punctuation and spaces which is converted to three digit numbers instead of four
             } else {
               $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
             }
