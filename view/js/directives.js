@@ -123,32 +123,34 @@ angular.module('nucleotext')
         $scope.decoded = false;
         $scope.decoder = function() {
           $scope.decoded = true;
-          $scope.reverseToBaseFour = [];
+          var reverseToBaseFour = [];
           var wordConstructor = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             // console.log($scope.nucleotext[i])
             switch ($scope.nucleotext[i]) {
               case 'A':
-                $scope.reverseToBaseFour.push('0')
+                reverseToBaseFour.push('0')
                 break;
               case 'T':
-                $scope.reverseToBaseFour.push('1')
+                reverseToBaseFour.push('1')
                 break;
               case 'G':
-                $scope.reverseToBaseFour.push('2')
+                reverseToBaseFour.push('2')
                 break;
               case 'C':
-                $scope.reverseToBaseFour.push('3')
+                reverseToBaseFour.push('3')
                 break;
             }
           }
-          while ($scope.reverseToBaseFour.length > 0) {
-            wordConstructor.push($scope.reverseToBaseFour.splice(0, 4))
+          while (reverseToBaseFour.length > 0) {
+            wordConstructor.push(reverseToBaseFour.splice(0, 4))
           }
+          $scope.convertedString = [];
           for (var i = 0; i < wordConstructor.length; i++) {
-            var convertToDecimal = parseInt(wordConstructor[i].join(''), 4)
-            console.log(String.fromCharCode(convertToDecimal))
+            var convertToLetter = parseInt(wordConstructor[i].join(''), 4)
+            $scope.convertedString.push(String.fromCharCode(convertToLetter))
           }
+          $scope.convertedString = $scope.convertedString.join('')
         }
       }
     }
