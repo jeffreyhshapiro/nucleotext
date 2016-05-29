@@ -24,9 +24,14 @@ angular.module('nucleotext')
           $scope.baseFourString = false; //if baseFourString is showing on page, hide it
           $scope.binaryText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
+            if ($scope.nucleotext[i] === ' ') {
+              $scope.binaryText.push('0100000')
+            } else {
+              $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
+            }
           }
           $scope.binaryString = $scope.binaryText.join('')
+          console.log($scope.binaryString)
           $scope.generateNucleotideSequenceBinary();
         }
       }
@@ -41,7 +46,11 @@ angular.module('nucleotext')
           $scope.binaryString = false; //if binaryString is showing on page hide it
           $scope.baseFourText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
+            if ($scope.nucleotext[i] === ' ') {
+              $scope.baseFourText.push('0200')
+            } else {
+              $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
+            }
           }
           $scope.baseFourString = $scope.baseFourText.join('')
           $scope.generateNucleotideSequenceBaseFour();
@@ -133,25 +142,16 @@ angular.module('nucleotext')
                 break;
             }
           }
-          console.log($scope.reverseToBaseFour)
           for (var i = 0; i < $scope.reverseToBaseFour.length; i++) {
             wordConstructor.push($scope.reverseToBaseFour.splice(0, 4))
           }
+          console.log(wordConstructor)
           for (var i = 0; i < wordConstructor.length; i++) {
             // console.log(wordConstructor[i].join(''))
             wordConstructor[i].join('')
             var convertToDecimal = parseInt(wordConstructor[i].join(''), 4)
             console.log(String.fromCharCode(convertToDecimal))
           }
-          // grab set of four items from an array
-          // join them together
-          // convert to base 10 (unicode??)
-          // convert to a letter
-
-          // for (var i = 0; i < $scope.reverseToBaseFour.length; i++) {
-          //   $scope.reverseToBaseFour.splice(0, 4);
-          //   console.log($scope.reverseToBaseFour)
-          // }
         }
       }
     }
