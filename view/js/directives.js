@@ -142,13 +142,10 @@ angular.module('nucleotext')
                 break;
             }
           }
-          for (var i = 0; i < $scope.reverseToBaseFour.length; i++) {
+          while ($scope.reverseToBaseFour.length > 0) {
             wordConstructor.push($scope.reverseToBaseFour.splice(0, 4))
           }
-          console.log(wordConstructor)
           for (var i = 0; i < wordConstructor.length; i++) {
-            // console.log(wordConstructor[i].join(''))
-            wordConstructor[i].join('')
             var convertToDecimal = parseInt(wordConstructor[i].join(''), 4)
             console.log(String.fromCharCode(convertToDecimal))
           }
