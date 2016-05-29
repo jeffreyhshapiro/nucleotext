@@ -48,6 +48,8 @@ angular.module('nucleotext')
           for (var i = 0; i < $scope.nucleotext.length; i++) {
             if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 3) {
               $scope.baseFourText.push('0' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle punctuation and spaces which is converted to three digit numbers instead of four
+            } else if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 2) {
+              $scope.baseFourText.push('00' + $scope.nucleotext[i].charCodeAt(0).toString(4))
             } else {
               $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
             }
