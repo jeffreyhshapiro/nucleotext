@@ -1,9 +1,17 @@
 angular.module('nucleotext')
   .controller('selectAlg', function($scope, $http) {
     $scope.chooseCalcMethod = true;
+    $scope.showDecoder = function() {
+      $scope.decodedRadio = true;
+    }
+    $('#binaryButton').click(function() {
+      $scope.decodedRadio = false;
+    })
     $scope.selectAlg = function() {
       if ($scope.alg === 'binary') {
         $scope.showNucleotext();
+      } else if ($scope.alg === 'baseFour' && $scope.decode) {
+        $scope.decoder();
       } else if ($scope.alg === 'baseFour') {
         $scope.showNucleotext();
       } else if (!$scope.alg || $scope.nucleotext === ''){
@@ -18,7 +26,6 @@ angular.module('nucleotext')
           nucleotideString: $scope.nucleotideString,
           possibilities: $scope.possibilitiesFixed
         }
-        // console.log($scope.queryData)
       } else {
         $scope.queryData = {
           type: $scope.alg,

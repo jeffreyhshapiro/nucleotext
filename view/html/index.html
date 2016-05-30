@@ -21,7 +21,8 @@
   <div ng-controller='selectAlg' class="radio">
     <button type="button" class="btn btn-primary" ng-click='selectAlg()'>Submit</button>
     <label id="binaryPadding"><input type="radio" id='binaryButton' ng-model='alg' value='binary' name="optradio">Binary Calculation</label>
-    <label><input type="radio" ng-model='alg' value='baseFour' name="optradio">Base 4 Calculation</label>
+    <label><input type="radio" ng-model='alg' value='baseFour' name="optradio" ng-change='showDecoder()'>Base 4 Calculation</label>
+    <label ng-show='decodedRadio'><input type="checkbox" ng-model='decode' value="decode">Decode (base four only)</label>
     <br /><br />
     <div ng-hide='chooseCalcMethod'>Please enter text to be transformed and/or choose either binary or base four as your calculation method.</div>
     <text-query></text-query>
@@ -29,6 +30,7 @@
     <gen-nuc-string-binary></gen-nuc-string-binary>
     <gen-base-four></gen-base-four>
     <gen-nuc-string-base-four></gen-nuc-string-base-four>
+    <decoder></decoder>
   </div>
 </div>
 

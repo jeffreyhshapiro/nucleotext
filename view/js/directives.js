@@ -5,6 +5,7 @@ angular.module('nucleotext')
       templateUrl: 'template/textQuery.html',
       link: function($scope, elem, attrs) {
         $scope.showNucleotext = function() {
+          $scope.decoded = false; //if decoder is displaying, hide it
           $scope.showNucleotextString = true;
           if ($scope.alg === 'binary') {
             $scope.convertToBinary();
@@ -15,7 +16,6 @@ angular.module('nucleotext')
       }
     }
   })
-
   .directive('genBinary', function() {
     return {
       restrict: 'EA',
@@ -25,9 +25,14 @@ angular.module('nucleotext')
           $scope.baseFourString = false; //if baseFourString is showing on page, hide it
           $scope.binaryText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
+            if ($scope.nucleotext[i] === ' ') {
+              $scope.binaryText.push('0100000')
+            } else {
+              $scope.binaryText.push($scope.nucleotext[i].charCodeAt(0).toString(2))
+            }
           }
           $scope.binaryString = $scope.binaryText.join('')
+          console.log($scope.binaryString)
           $scope.generateNucleotideSequenceBinary();
         }
       }
@@ -42,7 +47,13 @@ angular.module('nucleotext')
           $scope.binaryString = false; //if binaryString is showing on page hide it
           $scope.baseFourText = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
+            if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 3) {
+              $scope.baseFourText.push('0' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle punctuation and spaces which is converted to three digit numbers instead of four
+            } else if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 2) {
+              $scope.baseFourText.push('00' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle line breaks
+            } else {
+              $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
+            }
           }
           $scope.baseFourString = $scope.baseFourText.join('')
           $scope.generateNucleotideSequenceBaseFour();
@@ -103,6 +114,49 @@ angular.module('nucleotext')
             }
           }
           $scope.nucleotideStringBaseFour = $scope.nucleotideBaseFour.join('')
+        }
+      }
+    }
+  })
+  .directive('decoder', function() {
+    return {
+      restrict: 'EA',
+      templateUrl: 'template/decoder.html',
+      link: function($scope, elem, attrs) {
+        $scope.decoder = function() {
+          $scope.showNucleotextString = false;
+          $scope.nucleotideString = false;
+          $scope.nucleotideStringBaseFour = false;
+          $scope.binaryString = false;
+          $scope.baseFourString = false;
+          $scope.decoded = true;
+          var reverseToBaseFour = [];
+          var wordConstructor = [];
+          for (var i = 0; i < $scope.nucleotext.length; i++) {
+            switch ($scope.nucleotext[i]) {
+              case 'A':
+                reverseToBaseFour.push('0')
+                break;
+              case 'T':
+                reverseToBaseFour.push('1')
+                break;
+              case 'G':
+                reverseToBaseFour.push('2')
+                break;
+              case 'C':
+                reverseToBaseFour.push('3')
+                break;
+            }
+          }
+          while (reverseToBaseFour.length > 0) {
+            wordConstructor.push(reverseToBaseFour.splice(0, 4))
+          }
+          $scope.convertedString = [];
+          for (var i = 0; i < wordConstructor.length; i++) {
+            var convertToLetter = parseInt(wordConstructor[i].join(''), 4)
+            $scope.convertedString.push(String.fromCharCode(convertToLetter))
+          }
+          $scope.convertedString = $scope.convertedString.join('')
         }
       }
     }
