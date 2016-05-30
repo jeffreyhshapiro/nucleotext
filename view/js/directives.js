@@ -124,6 +124,7 @@ angular.module('nucleotext')
       templateUrl: 'template/decoder.html',
       link: function($scope, elem, attrs) {
         $scope.decoder = function() {
+          $scope.showNucleotextString = false;
           $scope.nucleotideString = false;
           $scope.nucleotideStringBaseFour = false;
           $scope.binaryString = false;
