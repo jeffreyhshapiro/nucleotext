@@ -5,6 +5,7 @@ angular.module('nucleotext')
       templateUrl: 'template/textQuery.html',
       link: function($scope, elem, attrs) {
         $scope.showNucleotext = function() {
+          $scope.decoded = false; //if decoder is displaying, hide it
           $scope.showNucleotextString = true;
           if ($scope.alg === 'binary') {
             $scope.convertToBinary();
@@ -49,7 +50,7 @@ angular.module('nucleotext')
             if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 3) {
               $scope.baseFourText.push('0' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle punctuation and spaces which is converted to three digit numbers instead of four
             } else if ($scope.nucleotext[i].charCodeAt(0).toString(4).length === 2) {
-              $scope.baseFourText.push('00' + $scope.nucleotext[i].charCodeAt(0).toString(4))
+              $scope.baseFourText.push('00' + $scope.nucleotext[i].charCodeAt(0).toString(4)) //handle line breaks
             } else {
               $scope.baseFourText.push($scope.nucleotext[i].charCodeAt(0).toString(4))
             }
@@ -122,13 +123,15 @@ angular.module('nucleotext')
       restrict: 'EA',
       templateUrl: 'template/decoder.html',
       link: function($scope, elem, attrs) {
-        $scope.decoded = false;
         $scope.decoder = function() {
+          $scope.nucleotideString = false;
+          $scope.nucleotideStringBaseFour = false;
+          $scope.binaryString = false;
+          $scope.baseFourString = false;
           $scope.decoded = true;
           var reverseToBaseFour = [];
           var wordConstructor = [];
           for (var i = 0; i < $scope.nucleotext.length; i++) {
-            // console.log($scope.nucleotext[i])
             switch ($scope.nucleotext[i]) {
               case 'A':
                 reverseToBaseFour.push('0')

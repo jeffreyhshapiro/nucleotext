@@ -1,6 +1,12 @@
 angular.module('nucleotext')
   .controller('selectAlg', function($scope, $http) {
     $scope.chooseCalcMethod = true;
+    $scope.showDecoder = function() {
+      $scope.decodedRadio = true;
+    }
+    $('#binaryButton').click(function() {
+      $scope.decodedRadio = false;
+    })
     $scope.selectAlg = function() {
       if ($scope.alg === 'binary') {
         $scope.showNucleotext();
