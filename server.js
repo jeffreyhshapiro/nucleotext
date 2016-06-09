@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-var nucleotextSchema = require('./model/nucleotextSchema.js');
+// var nucleotextSchema = require('./model/nucleotextSchema.js');
+var nucleotextDB = require('./model/nucleotextDB.js')
 var bp = require('body-parser');
 var PORT = process.env.PORT || 3000;
 
@@ -18,24 +19,13 @@ app.get('/', function(req, res) {
   res.sendFile(index.html)
 })
 
-app.post('/nucleotexts', function(req, res) {
-  console.log(req.body)
-  var nucleotextDB = new nucleotextSchema({
-    type: req.body.type,
-    nucleotext: req.body.nucleotext,
-    baseString: req.body.binaryString || req.body.baseFourString,
-    nucleotideSequence: req.body.nucleotideString
-  })
-  nucleotextDB.save(function(err, nucleotext) {
-    if (err || !nucleotext) {
-      console.log(err)
-    } else if (nucleotext) {
-      console.log(nucleotext)
-      res.json(nucleotext)
-    }
-  })
-})
+app.post('/nucleotexts', nucleotextDB.nucleotextsPost)
 
 app.listen(PORT, function(){
   console.log('listening on '+ PORT)
 })
+
+// type: req.body.type,
+// nucleotext: req.body.nucleotext,
+// baseString: req.body.binaryString || req.body.baseFourString,
+// nucleotideSequence: req.body.nucleotideString
