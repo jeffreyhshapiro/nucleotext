@@ -24,8 +24,3 @@ app.post('/nucleotexts', nucleotextDB.nucleotextsPost)
 app.listen(PORT, function(){
   console.log('listening on '+ PORT)
 })
-
-// type: req.body.type,
-// nucleotext: req.body.nucleotext,
-// baseString: req.body.binaryString || req.body.baseFourString,
-// nucleotideSequence: req.body.nucleotideString

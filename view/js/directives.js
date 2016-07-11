@@ -1,14 +1,16 @@
 angular.module('nucleotext')
-  .directive('textQuery', function() {
+  .directive('textQuery', function(binaryTransform) {
     return {
       restrict: 'EA',
       templateUrl: 'template/textQuery.html',
       link: function($scope, elem, attrs) {
+
         $scope.showNucleotext = function() {
           $scope.decoded = false; //if decoder is displaying, hide it
           $scope.showNucleotextString = true;
           if ($scope.alg === 'binary') {
-            $scope.convertToBinary();
+            binaryTransform.convertToBinary($scope.nucleotext);
+            // $scope.convertToBinary();
           } else {
             $scope.convertToBaseFour();
           }
@@ -32,7 +34,7 @@ angular.module('nucleotext')
             }
           }
           $scope.binaryString = $scope.binaryText.join('')
-          console.log($scope.binaryString)
+          // console.log($scope.binaryString)
           $scope.generateNucleotideSequenceBinary();
         }
       }
