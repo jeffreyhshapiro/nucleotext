@@ -7,7 +7,6 @@ app.use(bp.json())
 
 module.exports = {
   nucleotextsPost: function(req, res) {
-    // console.log(req.body)
     var nucleotextDB = new nucleotextSchema({
       type: req.body.type,
       nucleotext: req.body.nucleotext,
@@ -18,7 +17,6 @@ module.exports = {
       if (err || !nucleotext) {
         throw err
       } else if (nucleotext) {
-        // console.log(nucleotext)
         res.json(nucleotext)
       }
     })

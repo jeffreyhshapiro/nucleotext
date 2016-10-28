@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html ng-app='nucleotext'>
-<head>
-  <title></title>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="index.css">
-</head>
-<body>
-<div class="container">
-  <h1 class="text-center">nucleotext</h1>
-  <p>nucleotext is a thought experiment that was inspired by an article I read from Harvard biologist George Church.  The most efficient storage system of information in the universe is DNA.  Now you can see what the day to day information you generate looks like as a single strand of DNA.</p>
-  <p>When you submit your text query, you can choose to have it transformed into a binary or base four string.  Depending on the transformation method, you will get two very different sequences for the same string of text.</p>
-  <p>For binary transformation the nucleotide sequence is randomly generated using Math.random.  This means if you analyze the same text twice you will get two different DNA sequences.  The total amount of combinations your nucleotide sequence can have is defined as f(x) = 2^x, where x is the length of your binary string.</p>
-  <p>For base four transformation the nucleotide sequence is generated using the fact that there are four nucleotide bases and four numbers displayed in the base four string (0, 1, 2, 3).  I assigned each base to a number meaning that there is no variation in generating this sequence from calculation to calculation. </p>
-  <br>
-  <br>
-  <div class="form-group">
-    <textarea class="form-control" rows="5" placeholder='Get ready to be nucleotexted' ng-model='nucleotext'></textarea>
+  <head>
+    <title></title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+  <div class="container">
+    <h1 class="text-center">nucleotext</h1>
+    <p>nucleotext is a thought experiment that was inspired by an article I read from Harvard biologist George Church.  The most efficient storage system of information in the universe is DNA.  Now you can see what the day to day information you generate looks like as a single strand of DNA.</p>
+    <p>When you submit your text query, you can choose to have it transformed into a binary or base four string.  Depending on the transformation method, you will get two very different sequences for the same string of text.</p>
+    <p>For binary transformation the nucleotide sequence is randomly generated using Math.random.  This means if you analyze the same text twice you will get two different DNA sequences.  The total amount of combinations your nucleotide sequence can have is defined as f(x) = 2^x, where x is the length of your binary string.</p>
+    <p>For base four transformation the nucleotide sequence is generated using the fact that there are four nucleotide bases and four numbers displayed in the base four string (0, 1, 2, 3).  I assigned each base to a number meaning that there is no variation in generating this sequence from calculation to calculation. </p>
+    <br>
+    <br>
+    <div class="form-group">
+      <textarea class="form-control" rows="5" placeholder='Enter a string to convert to a nucleotide or a nucleotide to a string' ng-model='nucleotext'></textarea>
+    </div>
+    <div ng-controller='selectAlg' class="radio">
+      <button type="button" class="btn btn-primary" ng-click='selectAlg()'>Submit</button>
+      <label id="binaryPadding"><input type="radio" id='binaryButton' ng-model='alg' value='binary' name="optradio">Binary Calculation</label>
+      <label><input type="radio" ng-model='alg' value='baseFour' name="optradio" ng-change='showDecoder()'>Base 4 Calculation</label>
+      <label ng-show='decodedRadio'><input type="checkbox" ng-model='decode' value="decode">Decode (base four only)</label>
+      <br /><br />
+      <div ng-hide='chooseCalcMethod'>Please enter text to be transformed and/or choose either binary or base four as your calculation method.</div>
+      <text-query></text-query>
+      <gen-binary></gen-binary>
+      <gen-nuc-string-binary></gen-nuc-string-binary>
+      <gen-base-four></gen-base-four>
+      <gen-nuc-string-base-four></gen-nuc-string-base-four>
+      <decoder></decoder>
+    </div>
   </div>
-  <div ng-controller='selectAlg' class="radio">
-    <button type="button" class="btn btn-primary" ng-click='selectAlg()'>Submit</button>
-    <label id="binaryPadding"><input type="radio" id='binaryButton' ng-model='alg' value='binary' name="optradio">Binary Calculation</label>
-    <label><input type="radio" ng-model='alg' value='baseFour' name="optradio" ng-change='showDecoder()'>Base 4 Calculation</label>
-    <label ng-show='decodedRadio'><input type="checkbox" ng-model='decode' value="decode">Decode (base four only)</label>
-    <br /><br />
-    <div ng-hide='chooseCalcMethod'>Please enter text to be transformed and/or choose either binary or base four as your calculation method.</div>
-    <text-query></text-query>
-    <gen-binary></gen-binary>
-    <gen-nuc-string-binary></gen-nuc-string-binary>
-    <gen-base-four></gen-base-four>
-    <gen-nuc-string-base-four></gen-nuc-string-base-four>
-    <decoder></decoder>
-  </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
-<script type="text/javascript" src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
-<script type="text/javascript" src="app.js"></script>
-<script type="text/javascript" src="textSubmit.js"></script>
-<script type="text/javascript" src="directives.js"></script>
-</body>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="textSubmit.js"></script>
+  <script type="text/javascript" src="directives.js"></script>
+  </body>
 </html>

@@ -1,12 +1,25 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-// var nucleotextSchema = require('./model/nucleotextSchema.js');
 var nucleotextDB = require('./model/nucleotextDB.js')
 var bp = require('body-parser');
+var session = require('express-session');
+var dotenv = require('dotenv').config();
 var PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/nucleotext'); //create a new database
+mongoose.connect(process.env.DB_PATH); //create a new database
+
+app.use(
+  session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: true,
+    maxAge: 60000
+  }
+})
+)
 
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
